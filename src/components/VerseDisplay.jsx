@@ -1,5 +1,5 @@
 
-import { Copy, Share2, RefreshCw } from "lucide-react";
+import { Copy, Share2, RefreshCw, Check } from "lucide-react";
 
 function VerseDisplay({
   verse,
@@ -62,7 +62,7 @@ function VerseDisplay({
           aria-label={copied ? "Copied" : "Copy verse"}
           title={copied ? "Copied" : "Copy verse"}
         >
-          <Copy size={17} />
+          {copied ? <Check size={17} /> : <Copy size={17} />}
         </button>
 
         <button
@@ -74,6 +74,19 @@ function VerseDisplay({
           <Share2 size={17} />
         </button>
       </div>
+
+      <p
+        className={`copy-message ${copied ? "visible" : ""}`}
+        role="status"
+        aria-live="polite"
+      >
+        {copied && (
+          <>
+            <Check size={14} />
+            Verse copied — carry His words with you.
+          </>
+        )}
+      </p>
 
     </section>
   );

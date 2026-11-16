@@ -10,6 +10,7 @@ import { categories } from "./data/categories";
 import { getBibleVerse } from "./services/bibleApi";
 
 import "./App.css";
+import MusicPlayer from "./components/MusicPlayer";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -68,18 +69,23 @@ function App() {
   }
 
   async function handleCopy() {
-    if (!verse) return;
+  if (!verse) return;
 
-    try {
-      await navigator.clipboard.writeText(
-        `"${verse.text}" — ${verse.reference}`
-      );
+  try {
+    await navigator.clipboard.writeText(
+      `"${verse.text}" — ${verse.reference}`
+    );
 
-      setCopied(true);
-    } catch {
-      setError("Unable to copy verse.");
-    }
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+
+  } catch {
+    setError("Unable to copy verse.");
   }
+}
 
   async function handleShare() {
     if (!verse) return;
@@ -138,6 +144,7 @@ function App() {
           <span className="footer-divider">·</span>
           <span>Made with ♡</span>
       </footer>
+      <MusicPlayer />
     </main>
   );
 }
